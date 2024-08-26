@@ -1,0 +1,28 @@
+name: ApplyYC
+description: "Improve your YC application"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  firebase_auth: ^5.1.2
+  cloud_firestore: ^5.1.0
+  google_sign_in: ^6.2.1
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutterfire_cli: ^1.0.0
+
+flutter:
+  uses-material-design: true
+  fonts:
+  - family: Righteous
+    fonts:
+      - asset: fonts/Righteous-Regular.ttf

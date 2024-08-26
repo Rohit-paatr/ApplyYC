@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "728140410192",
+    "project_id": "applyyc-3860f",
+    "storage_bucket": "applyyc-3860f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728140410192:android:9fc21f5c88ffa59a8f9055",
+        "android_client_info": {
+          "package_name": "com.apply_yc.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "728140410192-a5ft3fe71g5hohb03rkj0mptf6j8lv05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJl_MWCQUmusb5Zr_qBgTqS7M0uB5xCYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "728140410192-a5ft3fe71g5hohb03rkj0mptf6j8lv05.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

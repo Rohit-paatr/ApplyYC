@@ -1,0 +1,27 @@
+[debug] [2024-08-26T02:28:46.974Z] ----------------------------------------------------------------------
+[debug] [2024-08-26T02:28:46.976Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2024-08-26T02:28:46.976Z] CLI Version:   13.15.0
+[debug] [2024-08-26T02:28:46.976Z] Platform:      darwin
+[debug] [2024-08-26T02:28:46.976Z] Node Version:  v20.13.1
+[debug] [2024-08-26T02:28:46.976Z] Time:          Sun Aug 25 2024 22:28:46 GMT-0400 (Eastern Daylight Time)
+[debug] [2024-08-26T02:28:46.976Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-08-26T02:28:47.015Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"flutter"}
+[debug] [2024-08-26T02:28:47.017Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-08-26T02:28:47.017Z] > authorizing via signed-in user (admin@paatr.ai)
+[debug] [2024-08-26T02:28:47.018Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"flutter"}
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/rohit/Desktop/Develop/apply_yc
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+

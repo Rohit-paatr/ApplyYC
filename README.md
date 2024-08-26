@@ -1,3 +1,3 @@
 # apply_yc
 
-A new Flutter project.
+Let's Freaking Go!

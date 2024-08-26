@@ -23,7 +23,7 @@ class LandingPage extends StatelessWidget {
         print("Document exists, fetching data...");
         Map<String, dynamic> data = docSnapshot.data() as Map<String, dynamic>;
         variables.userData = data;
-        print("User data: $data");
+
         // You can now use `data` as needed
       } else {
         // Document does not exist, create it
@@ -56,13 +56,12 @@ class LandingPage extends StatelessWidget {
           'photoUrl': userPhotoUrl,
           'lastSignIn': Timestamp.now(),
           'paid': false,
-          'totalMessages': 5,
+          'totalMessages': 10,
           'messagesSent': 0,
         };
 
         // Save user data in Firestore
         await _addUserDB(userId, userData);
-        print('User signed in: $userEmail');
 
         // Save user data in variables or perform other actions
         variables.activeUser = account;

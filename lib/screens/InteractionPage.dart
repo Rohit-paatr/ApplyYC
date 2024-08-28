@@ -13,6 +13,7 @@ class Interactionpage extends StatefulWidget {
 
 class _InteractionpageState extends State<Interactionpage> {
   bool errorText = false;
+  bool isLoading = false;
   void initState() {
     super.initState();
     errorText = false;
@@ -22,11 +23,6 @@ class _InteractionpageState extends State<Interactionpage> {
   final TextEditingController inputController = TextEditingController();
   String outputText = "";
 
-  List<String> questions = [
-    "If you had any other ideas you considered applying with, please list them. One may be something we've been waiting for. Often when we fund people it's to do something they list here and not in the main application.",
-    "What do you do?",
-    "Where are you from?",
-  ];
   final userId = variables.userData!['email'];
 
   void _handleSubmit() async {
@@ -35,9 +31,11 @@ class _InteractionpageState extends State<Interactionpage> {
           variables.userData!['totalMessages']) {
         try {
           setState(() {
+            isLoading = true;
             outputText =
                 "You selected: $selectedQuestion\nYou entered: ${inputController.text}";
-          }); // Save the data to Firestore
+          });
+          // Save the data to Firestore
           await _saveToFirestore();
 
           FirebaseFirestore _firestoreInstance = FirebaseFirestore.instance;
@@ -47,9 +45,14 @@ class _InteractionpageState extends State<Interactionpage> {
               .doc(variables.activeUser!.id)
               .update({'messagesSent': variables.userData!['messagesSent']});
 
-          setState(() {});
+          setState(() {
+            isLoading = false;
+          });
         } catch (e) {
           print("Error $e");
+          setState(() {
+            isLoading = false;
+          });
         }
       } else {
         _alert();
@@ -80,8 +83,6 @@ class _InteractionpageState extends State<Interactionpage> {
               Text(
                   'Subscribe now for \$9.99 and get 200 more messages to use on our platform.'),
               SizedBox(height: 20),
-              // Image.network('https://i.imgur.com/EHyR2nP.png',
-              //     height: 100), // Example product image
             ],
           ),
           actions: [
@@ -126,9 +127,14 @@ class _InteractionpageState extends State<Interactionpage> {
           });
         } else {
           // If the document doesn't exist, create it with the new message
+          print("Creating new document");
           await userDocRef.set({
             'messages': [newMessage]
           });
+          await userDocRef.set({
+            'messages': [newMessage, newMessage]
+          });
+          // Refresh the page after creating the new document
         }
 
         DocumentSnapshot doc = await userDocRef.get();
@@ -190,7 +196,7 @@ class _InteractionpageState extends State<Interactionpage> {
                           selectedQuestion = newValue;
                         });
                       },
-                      items: questions
+                      items: variables.questions
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -287,36 +293,39 @@ class _InteractionpageState extends State<Interactionpage> {
                     )),
                 SizedBox(height: 20),
                 if (variables.userData!['messagesSent'] > 0)
-                  StreamBuilder<DocumentSnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('messages')
-                        .doc(userId)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return CircularProgressIndicator();
-                      }
+                  isLoading
+                      ? CircularProgressIndicator()
+                      : StreamBuilder<DocumentSnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('messages')
+                              .doc(userId)
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return CircularProgressIndicator();
+                            }
 
-                      var userDoc = snapshot.data;
-                      var messages = userDoc!['messages'] as List<dynamic>;
-                      var lastMessage = messages.isNotEmpty
-                          ? messages.last
-                          : {'response': ''};
+                            var userDoc = snapshot.data;
+                            var messages =
+                                userDoc!['messages'] as List<dynamic>;
+                            var lastMessage = messages.isNotEmpty
+                                ? messages.last
+                                : {'response': ''};
 
-                      return Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
+                            return Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              padding: EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: SelectableText(
+                                lastMessage['response'],
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            );
+                          },
                         ),
-                        child: SelectableText(
-                          lastMessage['response'],
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      );
-                    },
-                  ),
                 Text(
                   "Total messages: ${variables.userData!['messagesSent'] ?? 0}/${variables.userData!['totalMessages']}",
                   style: TextStyle(color: Colors.white),

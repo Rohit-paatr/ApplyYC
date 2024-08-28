@@ -104,8 +104,12 @@ class LandingPage extends StatelessWidget {
                   color: Colors.white, fontFamily: 'Righteous', fontSize: 42),
             ),
             Text(
-              'Improve your answers to get that \$500k!',
+              'Improve your answers to get into YC!',
               style: TextStyle(color: Colors.white, fontSize: 22),
+            ),
+            Text(
+              'Powered by 50+ YC Alumni applications',
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
             SizedBox(
               height: 10,
@@ -178,13 +182,78 @@ class LandingPage extends StatelessWidget {
                         ],
                       ),
                     )
-                    // Icon(
-                    //   Icons.rocket,
-                    //   color: Colors.red,
-                    //   size: 40,
-                    // ),
                   ],
-                ))
+                )),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Privacy Policy'),
+                              IconButton(
+                                icon: Icon(Icons.close,
+                                    color: Colors.black, size: 24),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                            ],
+                          ),
+                          content: SingleChildScrollView(
+                            child: Text(variables.privacyPolicy),
+                          ),
+                          backgroundColor: Colors.grey[600],
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    'Privacy Policy',
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+                SizedBox(width: 20),
+                TextButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Terms of Service'),
+                              IconButton(
+                                icon: Icon(Icons.close,
+                                    color: Colors.black, size: 24),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                            ],
+                          ),
+                          content: SingleChildScrollView(
+                            child: Text(
+                              variables.termsOfService,
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                          backgroundColor: Colors.grey[600],
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    'Terms of Service',
+                    style: TextStyle(color: Colors.white, fontSize: 10),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
